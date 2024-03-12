@@ -20,11 +20,11 @@
 
             .flex {
                 display: flex;
-                justify-content: center;
                 align-items: center;
             }
 
             .col {
+                margin-top: 80px;
                 flex-direction: column;
             }
 
@@ -37,20 +37,38 @@
             }
 
             #game-container {
-                max-width: 60vw;
-                padding: 0rem 1rem;
+                width: 50vw;
+                gap: 25px;
+                padding: 0px 15px;
                 word-spacing: 100vw;
-                border: 4px solid #FFFFFF;
+                border: 3px solid #FFFFFF;
                 border-radius: 8px;
             }
 
-            .game-card {
-                min-width: 10vw;
-                max-height: 18vh;
-                padding-bottom: 6px;
-                margin: 0 4px;
-                border-radius: 8px;
-                background-color: #FFFFFF;
+            #game-container h1 {
+                max-width: 30vw;
+                letter-spacing: 3px;
+            }
+
+            .card {
+                width: 80vw;
+                padding: 3px 0px;
+                background-color: #ffffff;
+                border-radius: 10px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                text-align: center;
+            }
+
+            .card h2 {
+                all: unset;
+                font-size: 1.2rem;
+                color: #656565;
+            }
+
+            .card h3 {
+                all: unset;
+                font-size: 4rem;
+                font-weight: bold;
                 color: #000000;
             }
 
@@ -142,11 +160,16 @@
                 transition: background-color 0.3s ease;
             }
 
+            .result {
+                gap: 5vw;
+                display: flex;
+                width: 30vw;
+            }
+
             .resultButton {
                 width: 6rem;
                 height: 6rem;
                 background-color: #FFFFFF;
-                border: 10px solid lightgray;
                 box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
                 border-radius: 50%;
                 margin-top: 10vh;
@@ -156,6 +179,19 @@
 
             #controls button:hover {
                 box-shadow: #289a27 0px 0px 0px 1rem, #32a62f 0px 0px 0px 1.5rem, #66b248 0px 0px 0px 2rem;
+            }
+
+            .resultButton:hover {
+                box-shadow: #289a27 0px 0px 0px 1rem, #32a62f 0px 0px 0px 1.5rem, #66b248 0px 0px 0px 2rem;
+            }
+
+            .red {
+                border: 10px solid #ffa943;
+            }
+
+            .blue {
+                border: 10px solid #0074b6;
+
             }
 
             #controls #rock {
@@ -209,34 +245,16 @@
 
     <body>
         <div id="game-container" class="flex">
-            <h1>ROCK PAPER SCISSORS</h1>
-            <div class="game-card">
-                <center>
-                    <div>
-                        <p class="h">COMPUTER</p>
-                    </div>
-                    <div>
-                        <p class="h2"> SCORE</p>
-                    </div>
-                    <div>
-                        <p class="h1" id="computer-wins">0</p>
-                    </div>
-                </center>
-            </div>
-            <div class="game-card">
-                <center>
-                    <div>
-                        <p class="h">YOUR</p>
-                    </div>
-                    <div>
-                        <p class="h2"> SCORE</p>
-                    </div>
-                    <div>
-                        <p class="h1" id="human-wins">0</p>
-                    </div>
-                </center>
-            </div>
 
+            <h1>ROCK PAPER SCISSORS</h1>
+            <div class="card">
+                <h2>COMPUTER SCORE</h2>
+                <h3 id="computer-wins">0</h3>
+            </div>
+            <div class="card">
+                <h2>YOUR SCORE</h2>
+                <h3 id="human-wins">10</h3>
+            </div>
         </div>
         <div id="result" class="flex col"></div>
         <div id="controls">
@@ -310,7 +328,7 @@
                 footer: ""
             };
             updateScore();
-            console.log(humanWins, computerWins);
+            // console.log(humanWins, computerWins);
             let showRule = false;
             let showNext = false;
             function toggleRules() {
@@ -335,11 +353,6 @@
                 const computerChoice = choices[Math.floor(Math.random() * 3)];
 
                 const result = determineWinner(playerChoice, computerChoice);
-                // victoryScreenT1 = "Hurray !!";
-                // victoryScreenT2 = "You won";
-                //third
-
-                console.log(result);
 
                 document.getElementById('result').innerHTML = result;
                 document.getElementById('result').style.display = 'block';
@@ -365,13 +378,13 @@
             function determineWinner(player, computer) {
                 if (player === computer) {
                     document.getElementById('next-button').style.display = 'block';
-                    return `<div class="flex"><div><button class="resultButton"><img src= \"./${player}.png\" class="icon"></button></div><div class="flex col"><div class = "h1">TIE UP</div></div><div><button class="resultButton"><img src= \"./${computer}.png\" class="icon"></button></div></div>`;
+                    return `<div class="result flex"><div><button class="resultButton red"><img src= \"./${player}.png\" class="icon"></button></div><div class="flex col"><div class = "h1">TIE UP</div></div><div><button class="resultButton blue"><img src= \"./${computer}.png\" class="icon"></button></div></div>`;
                 } else if ((player === 'rock' && computer === 'scissors') ||
                     (player === 'scissors' && computer === 'paper') ||
                     (player === 'paper' && computer === 'rock')) {
-                    return `<div class="flex"><div><button class="resultButton"><img src= \"./${player}.png\" class="icon"></button></div><div class="flex col"><div class = "h1">YOU WIN</div><div> AGAINST PC</div></div><div><button class="resultButton"><img src= \"./${computer}.png\" class="icon"></button></div></div>`;
+                    return `<div class="result flex"><div><button class="resultButton red"><img src= \"./${player}.png\" class="icon"></button></div><div class="flex col"><center><div class = "h1">YOU WIN</div><div> AGAINST PC</div></center></div><div><button class="resultButton blue"><img src= \"./${computer}.png\" class="icon"></button></div></div>`;
                 } else {
-                    return `<div class="flex"><div><button class="resultButton"><img src= \"./${player}.png\" class="icon"></button></div><div class="flex col"><div class = "h1">YOU LOST</div><div> AGAINST PC</div></div><div><button class="resultButton"><img src= \"./${computer}.png\" class="icon"></button></div></div>`;
+                    return `<div class="result flex"><div><button class="resultButton red"><img src= \"./${player}.png\" class="icon"></button></div><div class="flex col"><center><div class = "h1">YOU LOST</div><div> AGAINST PC</div></center></div><div><button class="resultButton blue"><img src= \"./${computer}.png\" class="icon"></button></div></div>`;
                 }
             }
 
