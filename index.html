@@ -336,6 +336,8 @@
                 document.getElementById('result').style.display = 'block';
                 document.getElementById('controls').style.display = 'none';
                 document.getElementById('play-again').style.display = 'block';
+                document.getElementById('rule-row-normal').style.display = 'block';
+                document.getElementById('rule-row-victory').style.display = 'none';
 
                 if (result.includes('WIN')) {
                     document.getElementById('rule-row-normal').style.display = 'none';
@@ -345,14 +347,9 @@
                     victoryScreen.header = "HURRAY !!";
                     victoryScreen.footer = "YOU WON THE GAME";
                 } else if (result.includes('LOST')) {
-                    document.getElementById('rule-row-normal').style.display = 'block';
-                    document.getElementById('rule-row-victory').style.display = 'none';
                     computerWins++;
                     victoryScreen.header = "SORRY !!";
                     victoryScreen.footer = "YOU LOST THE GAME";
-                } else {
-                    document.getElementById('rule-row-normal').style.display = 'block';
-                    document.getElementById('rule-row-victory').style.display = 'none';
                 }
                 updateScore();
             }
