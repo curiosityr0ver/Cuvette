@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://kit.fontawesome.com/438e02b510.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+        <link rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+        <link rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+        <link rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+        <link rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+        <title>Rock Paper Scissors</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #8cc461;
+                height: 100vh;
+                width: 100vw;
+            }
+
+            ul {
+                list-style-type: square;
+            }
+
+            li::marker {
+                color: yellow;
+                size: 1rem;
+            }
+
+            #body1 {
+                width: 100vw;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 2rem;
+            }
+
+            #body2 {
+                padding: 100px;
+                width: 100vw;
+                display: none;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 2rem;
+                color: #FFFFFF;
+                background-image: url('./Group\ 5-overlay.png');
+                background-repeat: no-repeat;
+                background-position: center;
+                /* Replace 'background.jpg' with your image file name */
+                background-size: auto;
+            }
+
+            .bgImg {
+                margin-top: 25%;
+                position: absolute;
+                margin-left: auto;
+                margin-right: auto;
+                left: 0;
+                right: 0;
+                text-align: center;
+            }
+
+            br {
+                margin: 10px;
+            }
+
+            .card {
+                background-color: #FFFFFF;
+                border-radius: 8px;
+                max-width: 15%;
+                padding: 5px 5px;
+                text-align: center;
+            }
+
+            .card span {
+                font-size: 4rem;
+                font-weight: bold;
+            }
+
+            .transparentButton {
+                font-size: 1.5rem;
+                background-color: #8cc461;
+                border: 4px solid #FFFFFF;
+                color: #FFFFFF;
+                border-radius: 8px;
+                padding: 5px 20px;
+            }
+
+            #body2 .transparentButton {
+                position: absolute;
+                bottom: 15px;
+                right: 15px;
+            }
+
+            .solidButton {
+                font-size: 1.2rem;
+                background-color: #FFFFFF;
+                border: none;
+                font-weight: bold;
+                color: #6b6b6b;
+                border-radius: 8px;
+                padding: 8px 20px;
+            }
+
+            #result {
+                text-align: center;
+
+                margin-top: 20px;
+                font-size: 18px;
+                font-weight: bold;
+            }
+
+            #score {
+
+                margin-top: 20px;
+                font-size: 16px;
+                width: 50%;
+                border: 2px solid #FFFFFF;
+                padding: 12px;
+                border-radius: 12px;
+                word-spacing: 100vw;
+                display: flex;
+                justify-items: center;
+                gap: 5%;
+            }
+
+            #score h1 {
+                color: #FFFFFF;
+            }
+
+            #matchResults {
+                margin-top: 20px;
+                font-size: 16px;
+            }
+
+            #ruleArea {
+                position: absolute;
+                bottom: 100px;
+                right: 100px;
+                width: 25vw;
+            }
+
+            #ruleArea .bottomRow {
+                position: absolute;
+                bottom: -20px;
+                right: 20px;
+            }
+
+            #ruleCrossButton {
+                position: absolute;
+                top: -5px;
+                left: 90%;
+                font-size: 1.5rem;
+                font-weight: bold;
+                width: 2rem;
+                height: 2rem;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border: 4px solid #FFFFFF;
+                background-color: red;
+                border-radius: 50%;
+                transition: background-color 0.3s ease;
+            }
+
+            #ruleCrossButton:hover {
+                background-color: darkred;
+            }
+
+            #hidden-box {
+                display: block;
+                color: #FFFFFF;
+                background-color: #004429;
+                border: 9px solid white;
+                margin: 10px;
+                border-radius: 5px;
+                text-align: center;
+            }
+
+            #playingArea {
+                display: grid;
+                grid-template-columns: repeat(5, 1fr);
+                grid-template-rows: repeat(5, 1fr);
+                grid-column-gap: 0px;
+                grid-row-gap: 0px;
+                height: 50vh;
+                width: 50vh;
+                /* border: 1px solid red */
+            }
+
+            #playingArea button {
+                width: 6rem;
+                height: 6rem;
+                background-color: #FFFFFF;
+                border: 10px solid purple;
+                box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
+                border-radius: 50%;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+            }
+
+            #playingArea #rock {
+                grid-area: 1 / 1 / 2 / 2;
+                border: 10px solid #0074b6;
+            }
+
+            /* #playingArea #rockline {
+                grid-area: 1 / 3 / 5 / 3;
+                background-color: pink;
+            } */
+
+            #playingArea #paper {
+                grid-area: 5/3/6/4;
+                border: 10px solid #bd00ff;
+            }
+
+            #playingArea #scissors {
+                grid-area: 1/5/2/6;
+                border: 10px solid #ffa943;
+            }
+
+            #playingArea button:hover {
+                box-shadow: #289a27 0px 0px 0px 1rem, #32a62f 0px 0px 0px 1.5rem, #66b248 0px 0px 0px 2rem;
+            }
+
+            #playAgain {
+                display: inline-block;
+
+            }
+
+            #matchResults {
+                color: #FFFFFF;
+            }
+
+            #result2 {
+                margin-top: 60vh;
+            }
+
+            #result2Header {
+                font-size: 4rem;
+                font-weight: bold;
+            }
+
+            #result2Footer {
+                font-size: 2rem;
+                font-weight: bold;
+            }
+
+            #result {
+                color: #FFFFFF;
+                text-align: center;
+            }
+
+        </style>
+    </head>
+
+    <body onload="updateScore()">
+        <div id="body2">
+            <!-- <button class="solidButton" onclick="resetGame()">Play Again</button> -->
+            <div id="result2">
+                <div id="result2Header"></div>
+                <div id="result2Footer"></div>
+            </div>
+            <button class="solidButton" onclick="toggleNextDisplay()">PLAY AGAIN</button>
+            <button class="transparentButton" onclick="toggleNextDisplay()">NEXT</button>
+        </div>
+        <div id="body1">
+            <div id="score">
+                <div>
+                    <h1>ROCK PAPER SCISSORS</h1>
+                </div>
+                <div class="card">
+                    COMPUTER SCORE <span id="computerScore">0</span>
+                </div>
+                <div class="card">
+                    YOUR SCORE <span id="playerScore">0</span>
+                </div>
+            </div>
+            <div id="result"></div>
+            <div id="playingArea">
+
+                <button id="rock" onclick="playGame('rock')">
+                    <img src="./rock.png" alt="" class="icon">
+                </button>
+                <button id="paper" onclick="playGame('paper')">
+                    <img src="./paper.png" alt="" class="icon">
+
+                </button>
+                <button id="scissors" onclick="playGame('scissors')">
+                    <img src="./scissor.png" alt="" class="icon">
+                </button>
+            </div>
+            <div id="matchResults"></div>
+            <button id="playAgain" class="solidButton" onclick="resetGame()">PLAY AGAIN</button>
+            <div id="ruleArea">
+                <div id="hidden-box">
+                    <div id="ruleCrossButton" onclick="toggleHiddenBox()">X</div>
+                    <h2>Game Rules</h2>
+                    <ul>
+                        <li>
+                            <p>Rock beats scissors, scissors beat paper, and paper beats rock.</p>
+                        </li>
+                        <li>
+                            <p>
+                                Agree ahead of time whether you'll count off "rock, papers,
+                                scissors, shoot"
+                                or
+                                just "rock, paper, scissors."
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                Use rock, paper, scissor, to settle minor decisions or simply play
+                                to pass
+                                the
+                                time.
+                            </p>
+                        </li>
+                        <li>
+                            <p>If both players lay down the same hand, each player lays down another
+                                hand.
+                            </p>
+                        </li>
+                    </ul>
+
+
+                </div>
+                <br>
+                <div class="bottomRow">
+                    <button class="transparentButton" onclick="toggleHiddenBox()">RULES</button>
+                    <button class="transparentButton" onclick="toggleNextDisplay()">NEXT</button>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            var showRules = true;
+            var showPlayingArea = true;
+            var currentDisplay = true;
+            var result2 = { header: "", footer: "" };
+            toggleNextDisplay();
+            toggleHiddenBox();
+
+            var playAgainButton = document.getElementById('playAgain');
+            playAgainButton.style.display = 'none';
+
+
+            var playerWins = parseInt(localStorage.getItem('playerWins')) || 0;
+            var computerWins = parseInt(localStorage.getItem('computerWins')) || 0;
+
+
+            function playGame(playerChoice) {
+                var choices = ['rock', 'paper', 'scissors'];
+                var computerChoice = choices[Math.floor(Math.random() * 3)];
+
+                var result = "";
+
+                if (playerChoice === computerChoice) {
+                    result = "TIE UP";
+                    result2.header = "TIE UP";
+                } else if (
+                    (playerChoice === 'rock' && computerChoice === 'scissors') ||
+                    (playerChoice === 'paper' && computerChoice === 'rock') ||
+                    (playerChoice === 'scissors' && computerChoice === 'paper')
+                ) {
+                    result = "YOU WIN AGAINST PC";
+                    result2.header = "HURRAY !!";
+                    result2.footer = "YOU WON THE GAME";
+                    playerWins++;
+                } else {
+                    result = "YOU LOSE AGAINST PC";
+                    result2.header = "SORRY !!";
+                    result2.footer = "YOU LOST THE GAME";
+                    computerWins++;
+                }
+
+                document.getElementById('result').innerText = result;
+                document.getElementById('result2Header').innerText = result2.header;
+                document.getElementById('result2Footer').innerText = result2.footer;
+
+
+                updateScore();
+                var playingArea = document.getElementById('playingArea');
+                playingArea.style.display = 'none';
+                playAgainButton.style.display = 'inline-block';
+                showPlayingArea = false;
+            }
+
+            function updateScore() {
+                document.getElementById('playerScore').innerText = playerWins;
+                document.getElementById('computerScore').innerText = computerWins;
+
+                // Update localStorage
+                localStorage.setItem('playerWins', playerWins);
+                localStorage.setItem('computerWins', computerWins);
+            }
+
+
+            function resetGame() {
+                var hiddenBox = document.getElementById('playingArea');
+                hiddenBox.style.display = showPlayingArea ? 'none' : 'grid';
+                playAgainButton.style.display = 'none';
+                showPlayingArea = !showPlayingArea;
+                document.getElementById('result').innerText = "";
+                document.getElementById('matchResults').innerText = "";
+            }
+            function toggleHiddenBox() {
+                var hiddenBox = document.getElementById('hidden-box');
+                console.log(hiddenBox.style.display);
+                hiddenBox.style.display = showRules ? 'none' : 'block';
+                showRules = !showRules;
+            }
+            function toggleNextDisplay() {
+
+                var body1 = document.getElementById('body1');
+                var body2 = document.getElementById('body2');
+                console.log(currentDisplay);
+                body1.style.display = currentDisplay ? 'flex' : 'none';
+                body2.style.display = !currentDisplay ? 'flex' : 'none';
+                currentDisplay = !currentDisplay;
+            }
+        </script>
+    </body>
+
+</html>
