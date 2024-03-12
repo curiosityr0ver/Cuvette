@@ -55,6 +55,14 @@
                 right: 5vw;
             }
 
+            #rule-row-normal {
+                display: block;
+            }
+
+            #rule-row-victory {
+                display: none;
+            }
+
             #rule-row button {
                 background-color: transparent;
                 color: #FFFFFF;
@@ -140,6 +148,11 @@
                 cursor: pointer;
                 transition: background-color 0.3s ease;
             }
+
+            /* #next-button {
+                display: flex;
+                flex-direction: col;
+            } */
 
             #controls button:hover {
                 box-shadow: #289a27 0px 0px 0px 1rem, #32a62f 0px 0px 0px 1.5rem, #66b248 0px 0px 0px 2rem;
@@ -267,9 +280,15 @@
                     </li>
                 </ul>
             </div>
+
             <div id="rule-row">
-                <button id="rule-button" onclick="toggleRules()">RULES</button>
-                <button id="next-button" onclick="toggleNext()">NEXT</button>
+                <div id="rule-row-normal">
+                    <button id="rule-button" onclick="toggleRules()">RULES</button>
+                </div>
+                <div id="rule-row-victory">
+                    <button id="rule-button" onclick="toggleRules()">RULES</button>
+                    <button id="next-button" onclick="toggleNext()">NEXT</button>
+                </div>
             </div>
         </div>
 
@@ -319,19 +338,28 @@
                 document.getElementById('play-again').style.display = 'block';
 
                 if (result.includes('WIN')) {
+                    document.getElementById('rule-row-normal').style.display = 'none';
+                    document.getElementById('rule-row-victory').style.display = 'block';
+
                     humanWins++;
                     victoryScreen.header = "HURRAY !!";
                     victoryScreen.footer = "YOU WON THE GAME";
                 } else if (result.includes('LOST')) {
+                    document.getElementById('rule-row-normal').style.display = 'block';
+                    document.getElementById('rule-row-victory').style.display = 'none';
                     computerWins++;
                     victoryScreen.header = "SORRY !!";
                     victoryScreen.footer = "YOU LOST THE GAME";
+                } else {
+                    document.getElementById('rule-row-normal').style.display = 'none';
+                    document.getElementById('rule-row-victory').style.display = 'block';
                 }
                 updateScore();
             }
 
             function determineWinner(player, computer) {
                 if (player === computer) {
+                    document.getElementById('next-button').style.display = 'block';
                     return `<div class="flex"><div><button class="resultButton"><img src= \"./${player}.png\" class="icon"></button></div><div class="flex col"><div class = "h1">TIE UP</div></div><div><button class="resultButton"><img src= \"./${computer}.png\" class="icon"></button></div></div>`;
                 } else if ((player === 'rock' && computer === 'scissors') ||
                     (player === 'scissors' && computer === 'paper') ||
