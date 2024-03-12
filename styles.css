@@ -122,6 +122,9 @@ body {
     padding: 0px 8px;
     font-size: 1.5rem;
     font-weight: bold;
+    position: relative;
+    left: 10px;
+    bottom: 10px;
 }
 
 #close-rules {
