@@ -56,7 +56,7 @@
             }
 
             #rule-row-normal {
-                display: block;
+                display: flex;
             }
 
             #rule-row-victory {
@@ -336,12 +336,11 @@
                 document.getElementById('result').style.display = 'block';
                 document.getElementById('controls').style.display = 'none';
                 document.getElementById('play-again').style.display = 'block';
-                document.getElementById('rule-row-normal').style.display = 'block';
-                document.getElementById('rule-row-victory').style.display = 'none';
+
 
                 if (result.includes('WIN')) {
+                    document.getElementById('rule-row-victory').style.display = 'flex';
                     document.getElementById('rule-row-normal').style.display = 'none';
-                    document.getElementById('rule-row-victory').style.display = 'block';
 
                     humanWins++;
                     victoryScreen.header = "HURRAY !!";
