@@ -32,6 +32,10 @@
                 font-size: 2rem;
             }
 
+            .h2 {
+                font-size: 1rem;
+            }
+
             #game-container {
                 max-width: 60vw;
                 padding: 0rem 1rem;
@@ -41,8 +45,9 @@
             }
 
             .game-card {
-                max-width: 12vw;
+                min-width: 10vw;
                 max-height: 18vh;
+                padding-bottom: 6px;
                 margin: 0 4px;
                 border-radius: 8px;
                 background-color: #FFFFFF;
@@ -149,11 +154,6 @@
                 transition: background-color 0.3s ease;
             }
 
-            /* #next-button {
-                display: flex;
-                flex-direction: col;
-            } */
-
             #controls button:hover {
                 box-shadow: #289a27 0px 0px 0px 1rem, #32a62f 0px 0px 0px 1.5rem, #66b248 0px 0px 0px 2rem;
             }
@@ -210,21 +210,30 @@
     <body>
         <div id="game-container" class="flex">
             <h1>ROCK PAPER SCISSORS</h1>
-
             <div class="game-card">
                 <center>
-                    <h5>COMPUTER SCORE</h5>
-                </center>
-                <center>
-                    <p class="h1" id="computer-wins">0</p>
+                    <div>
+                        <p class="h">COMPUTER</p>
+                    </div>
+                    <div>
+                        <p class="h2"> SCORE</p>
+                    </div>
+                    <div>
+                        <p class="h1" id="computer-wins">0</p>
+                    </div>
                 </center>
             </div>
             <div class="game-card">
                 <center>
-                    <h5>YOUR SCORE</h5>
-                </center>
-                <center>
-                    <p class="h1" id="human-wins">0</p>
+                    <div>
+                        <p class="h">YOUR</p>
+                    </div>
+                    <div>
+                        <p class="h2"> SCORE</p>
+                    </div>
+                    <div>
+                        <p class="h1" id="human-wins">0</p>
+                    </div>
                 </center>
             </div>
 
